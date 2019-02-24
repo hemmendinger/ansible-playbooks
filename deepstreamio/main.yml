@@ -1,0 +1,15 @@
+---
+- hosts: deepstream
+  become: yes
+  tasks:
+    # Install Deepstream on Ubuntu 16.04 from official repository
+    - name: Add Deepstream repository
+      apt_repository:
+        repo: deb http://dl.bintray.com/deepstreamio/deb {{ansible_distribution_release}} main
+        state: present
+    - name: Add Deepstream signing key to apt
+      apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: 379CE192D401AB61
+        state: present
+
