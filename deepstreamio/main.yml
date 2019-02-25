@@ -1,0 +1,20 @@
+---
+- hosts: deepstream
+  become: yes
+  tasks:
+    # Install Deepstream on Ubuntu from official repository
+    - name: Add Deepstream repository
+      apt_repository:
+        repo: deb http://dl.bintray.com/deepstreamio/deb {{ansible_distribution_release}} main
+        state: present
+    - name: Add Deepstream signing key to apt
+      apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: 379CE192D401AB61
+        state: present
+    - name: Update repositories cache and install Deepstream
+      apt:
+        name: deepstream.io
+        update_cache: yes
+
+
