@@ -16,6 +16,7 @@
       apt:
         name: deepstream.io
         update_cache: yes
+
     # Install RethinkDB on Ubuntu from official repository
     - name: Add RethinkDB repository
       apt_repository:
@@ -25,5 +26,9 @@
       apt_key:
         url: https://download.rethinkdb.com/apt/pubkey.gpg
         state: present
-      
+    - name: Update repositories cache and install RethinkDB
+      apt:
+        name: rethinkdb
+        update_cache: yes
+
 
