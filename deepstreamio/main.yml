@@ -16,5 +16,14 @@
       apt:
         name: deepstream.io
         update_cache: yes
-
+    # Install RethinkDB on Ubuntu from official repository
+    - name: Add RethinkDB repository
+      apt_repository:
+        repo: deb http://download.rethinkdb.com/apt {{ansible_distribution_release}} main
+        state: present
+    - name: Add RethinkDB signing key to apt
+      apt_key:
+        url: https://download.rethinkdb.com/apt/pubkey.gpg
+        state: present
+      
 
