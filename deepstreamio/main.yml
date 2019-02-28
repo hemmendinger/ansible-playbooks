@@ -1,6 +1,10 @@
 ---
 - hosts: deepstream
   become: yes
+  roles: 
+        - role: geerlingguy.nodejs
+          nodejs_version: "11.x"
+          nodejs_install_npm_user: "{{ ansible_user }}"
   tasks:
     # Install Deepstream on Ubuntu from official repository
     - name: Add Deepstream repository
@@ -30,5 +34,26 @@
       apt:
         name: rethinkdb
         update_cache: yes
-
+    
+    # Configure RethinkDB to start with systemd
+    - name: Copy rethinkdb.conf and set correct file attributes
+      copy:
+        src: ./files/rethinkdb.conf
+        dest: /usr/lib/tmpfiles.d/
+        owner: root
+        group: root
+        mode: 0644
+    - name: Create RethinkDB service file and set correct file attributes
+      copy:
+        src: ./files/rethinkdb@.service
+        dest: /usr/lib/systemd/system/
+        owner: root
+        group: root
+        mode: 0644    
+#    - name: Install NodeJS using Ansible Galaxy package playbook
+#      vars_files:
+#        - vars/main.yml
+#      roles: 
+#        - geerlingguy.nodejs
+      
 
