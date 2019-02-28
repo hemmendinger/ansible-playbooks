@@ -1,4 +1,6 @@
 # PostreSQL Role
 # https://galaxy.ansible.com/geerlingguy/postgresql | https://github.com/geerlingguy/ansible-role-postgresql
-- src: geerlingguy.postgresql
+#- src: geerlingguy.postgresql
+# https://galaxy.ansible.com/geerlingguy/nodejs | https://github.com/geerlingguy/ansible-role-nodejs
+- src: geerlingguy.nodejs
 
